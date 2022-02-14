@@ -3,6 +3,7 @@ package ru.job4j.collection;
 import java.util.*;
 
 public class SimpleArrayList<T> implements List<T> {
+    private static final int DEFAULT_CAPACITY = 10;
 
     private T[] container;
 
@@ -17,10 +18,18 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         if (size == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
+            grow();
         }
         modCount++;
         container[size++] = value;
+    }
+
+    private void grow() {
+        if (container.length == 0) {
+            container = (T[]) new Object[DEFAULT_CAPACITY];
+        } else {
+            container = Arrays.copyOf(container, container.length * 2);
+        }
     }
 
     @Override
@@ -62,14 +71,14 @@ public class SimpleArrayList<T> implements List<T> {
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return index < size;
             }
 
             @Override
             public T next() {
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
