@@ -4,19 +4,16 @@ public class SimpleQueue<T> {
     private final SimpleStack<T> in = new SimpleStack<>();
     private final SimpleStack<T> out = new SimpleStack<>();
     private int countIn;
+    private int countOut;
 
     public T poll() {
-        int count = countIn - 1;
-        while (countIn > 0) {
+        while (countIn > countOut) {
             out.push(in.pop());
-            countIn--;
+            countOut++;
         }
-        T element = out.pop();
-        while (countIn < count) {
-            in.push(out.pop());
-            countIn++;
-        }
-        return element;
+        countIn = 0;
+        countOut--;
+        return out.pop();
     }
 
     public void push(T value) {
