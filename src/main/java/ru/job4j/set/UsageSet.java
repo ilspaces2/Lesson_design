@@ -1,6 +1,7 @@
 package ru.job4j.set;
 
 import java.util.*;
+import java.util.Set;
 
 /*
  * Set хранит в себе уникальные элементы
