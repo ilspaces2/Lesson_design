@@ -1,6 +1,7 @@
 package ru.job4j.map;
 
 import java.util.*;
+import java.util.Map;
 
 /**
  * Демонстрация как два одинаковых с виду объекта ведут себя в HashMap.
