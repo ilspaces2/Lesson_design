@@ -31,15 +31,6 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void whenMapContainKey() {
-        SimpleMap<String, String> map = new SimpleMap<>();
-        map.put("1", "11");
-        map.put("1", "22");
-        assertThat(map.get("1"), is("22"));
-    }
-
-
-    @Test
     public void whenAddAndRemove() {
         SimpleMap<String, String> map = new SimpleMap<>();
         map.put("Hello", "Java");

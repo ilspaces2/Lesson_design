@@ -20,22 +20,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean put(K key, V value) {
         boolean rzl = false;
         expand();
-        int index = indexFor(hash(key.hashCode()));
+        int index = indexFor(hash(key));
         if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             count++;
-            modCount++;
-            rzl = true;
-        } else {
-            table[index].value = value;
             modCount++;
             rzl = true;
         }
         return rzl;
     }
 
-    private int hash(int hashCode) {
-        return hashCode ^ hashCode >>> 16;
+    private int hash(Object key) {
+        return key == null ? 0 : key.hashCode() ^ key.hashCode() >>> 16;
     }
 
     private int indexFor(int hash) {
@@ -48,7 +44,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
             MapEntry<K, V>[] newTable = new MapEntry[capacity];
             for (MapEntry<K, V> keys : table) {
                 if (keys != null) {
-                    newTable[indexFor(hash(keys.hashCode()))] = keys;
+                    newTable[indexFor(hash(keys))] = keys;
                 }
             }
             table = newTable;
@@ -57,22 +53,27 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        V value = null;
-        int index = indexFor(hash(key.hashCode()));
-        if (table[index] != null) {
-            value = table[index].value;
-        }
-        return value;
+        int index = indexFor(hash(key));
+        return compareKeys(index, key) ? table[index].value : null;
     }
 
     @Override
     public boolean remove(K key) {
-        boolean rzl = false;
-        int index = indexFor(hash(key.hashCode()));
-        if (table[index] != null) {
+        int index = indexFor(hash(key));
+        boolean rzl = compareKeys(index, key);
+        if (rzl) {
             table[index] = null;
             count--;
             modCount++;
+        }
+        return rzl;
+    }
+
+    private boolean compareKeys(int index, K key) {
+        boolean rzl = false;
+        MapEntry<K, V> currentKey = table[index];
+        if (currentKey != null && key != null && currentKey.key.hashCode() == key.hashCode()
+                && (currentKey.key == key || currentKey.key.equals(key))) {
             rzl = true;
         }
         return rzl;
