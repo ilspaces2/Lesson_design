@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 public class Analize {
 
     public static Info diff(Set<User> previous, Set<User> current) {
-        Info info = new Info(0, 0, 0);
+        int changed = 0;
+        int deleted = 0;
+        int added = 0;
         if (previous != null && current != null) {
             Map<Integer, String> currUsers = current.stream()
                     .collect(Collectors.toMap(User::getId, User::getName));
@@ -18,14 +20,14 @@ public class Analize {
                 }
                 if (value != null && !value.equals(prevUsers.getName())) {
                     currUsers.remove(prevUsers.getId());
-                    info.setChanged(1);
+                    changed++;
                 }
                 if (value == null) {
-                    info.setDeleted(1);
+                    deleted++;
                 }
             }
-            info.setAdded(currUsers.size());
+            added = currUsers.size();
         }
-        return info;
+        return new Info(added, changed, deleted);
     }
 }
