@@ -21,8 +21,8 @@ public class Config {
             String lines;
             while ((lines = read.readLine()) != null) {
                 if (!lines.startsWith("#") && lines.length() > 1) {
-                    String[] str = lines.split("=");
-                    if (str[0].isEmpty() || str.length != 2) {
+                    String[] str = lines.split("=", 2);
+                    if (str.length == 1 || str[0].isBlank() || str[1].isBlank()) {
                         throw new IllegalArgumentException();
                     }
                     values.put(str[0], str[1]);

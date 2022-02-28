@@ -27,18 +27,22 @@ public class ConfigTest {
                 is("12345"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void whenSeveralEqualsInString() {
         String path = "./data/pair_have_several_equals.properties";
         Config config = new Config(path);
         config.load();
+        assertThat(config.value("pass"),
+                is("password=1234"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void whenDoubleEquals() {
         String path = "./data/pair_double_equals.properties";
         Config config = new Config(path);
         config.load();
+        assertThat(config.value("key"),
+                is("=value"));
     }
 
     @Test(expected = IllegalArgumentException.class)
