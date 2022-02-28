@@ -8,7 +8,7 @@ public class Analizy {
              PrintWriter output = new PrintWriter(new FileOutputStream(target))) {
             boolean serverOff = true;
             String lines;
-            String[] strings;
+            String[] strings = null;
             while ((lines = input.readLine()) != null) {
                 strings = lines.split(" ");
                 if ((strings[0].equals("400") || strings[0].equals("500")) && serverOff) {
@@ -19,6 +19,9 @@ public class Analizy {
                     output.println(strings[1] + ";");
                     serverOff = true;
                 }
+            }
+            if (!serverOff) {
+                output.print(strings[1] + ";");
             }
         } catch (IOException err) {
             err.printStackTrace();
