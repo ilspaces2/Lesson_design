@@ -1,6 +1,5 @@
 [![Java CI with Maven](https://github.com/ilspaces2/job4j_design/actions/workflows/maven.yml/badge.svg)](https://github.com/ilspaces2/job4j_design/actions/workflows/maven.yml)
-
-
+[![codecov](https://codecov.io/gh/ilspaces2/job4j_design/branch/master/graph/badge.svg?token=D6GCCGH2CI)](https://codecov.io/gh/ilspaces2/job4j_design)
 # job4j_design
 
 ### Темы проекта:
