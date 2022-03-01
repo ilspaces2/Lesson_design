@@ -1,3 +1,6 @@
+[![Java CI with Maven](https://github.com/ilspaces2/job4j_design/actions/workflows/maven.yml/badge.svg)](https://github.com/ilspaces2/job4j_design/actions/workflows/maven.yml)
+
+
 # job4j_design
 
 ### Темы проекта:
