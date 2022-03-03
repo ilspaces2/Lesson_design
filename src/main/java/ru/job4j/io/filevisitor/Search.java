@@ -9,9 +9,9 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        if (args.length < 2) {
+        if (args.length != 2 || !Files.isDirectory(Paths.get(args[0])) || !args[1].startsWith(".")) {
             throw new IllegalArgumentException(
-                    "Missing parameters. Usage java -jar search.jar FOLDER EXTENSION");
+                    "Incorrect parameters. Usage java -jar search.jar FOLDER .EXTENSION");
         }
         Path start = Paths.get(args[0]);
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
