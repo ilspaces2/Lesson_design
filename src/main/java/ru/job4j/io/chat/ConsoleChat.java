@@ -39,9 +39,7 @@ public class ConsoleChat {
                 continueKey = false;
             }
             if (CONTINUE.equals(question)) {
-                log.add("User: " + question);
                 continueKey = true;
-                continue;
             }
             if (continueKey) {
                 answer = answers.get(random.nextInt(answers.size()));
