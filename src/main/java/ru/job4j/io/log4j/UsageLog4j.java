@@ -13,5 +13,19 @@ public class UsageLog4j {
         LOG.info("info message");
         LOG.warn("warn message");
         LOG.error("error message");
+
+        byte bit = 8;
+        short capacity = 16364;
+        int age = 10;
+        long distance = 1000L;
+        float pi = 3.14f;
+        double money = 1000.123;
+        char one = 49;
+        boolean key = true;
+
+        LOG.debug("Bit: {}, Capacity: {}, Age: {}, Distance: {}", bit, capacity, age, distance);
+        LOG.debug("Pi: {}, Money: {}, One: {}, Key: {}", pi, money, one, key);
+
+
     }
 }
