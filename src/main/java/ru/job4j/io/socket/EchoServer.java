@@ -16,9 +16,13 @@ public class EchoServer {
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
                         if (str.startsWith("GET")) {
                             String parameter = str.split(" ")[1];
-                            if ("/?msg=Bye".equals(parameter)) {
+                            if ("/?msg=Exit".equals(parameter)) {
                                 server.close();
                                 break;
+                            } else if ("/?msg=Hello".equals(parameter)) {
+                                out.write("Hello".getBytes());
+                            } else {
+                                out.write("What".getBytes());
                             }
                         }
                         System.out.println(str);
