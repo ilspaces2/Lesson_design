@@ -37,7 +37,7 @@ public class EchoServer {
                 }
             }
         } catch (IOException err) {
-            LOG.debug("Exception lo", err);
+            LOG.error("Exception lo", err);
         }
     }
 }
