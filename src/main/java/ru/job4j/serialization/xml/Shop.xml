@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<shop open="true" name="5Retail" sales="5">
+    <bayer sex="man"/>
+    <employees>
+        <employe>manager</employe>
+        <employe>security</employe>
+    </employees>
+</shop>
