@@ -9,6 +9,14 @@ public class User {
         this.mail = mail;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
     @Override
     public String toString() {
         return "User{"
