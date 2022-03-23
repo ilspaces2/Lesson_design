@@ -53,7 +53,9 @@ insert into product (name, type_id, expired_date, price) values ('Нектар',
 insert into product (name, type_id, expired_date, price) values ('Вода детская', 4, '2022.08.20',55);
 
 
-select * from product where type_id=1;
+select p.name, p.price, p.expired_date
+from product p join type t
+on p.type_id=t.id and t.name='СЫР';
 
 select * from product where lower(name) like ('%мороженное');
 
