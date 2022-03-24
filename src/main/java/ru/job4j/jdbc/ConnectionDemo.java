@@ -1,4 +1,4 @@
-package ru.job4j.jdbs;
+package ru.job4j.jdbc;
 
 import ru.job4j.io.Config;
 
