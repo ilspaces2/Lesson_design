@@ -19,10 +19,17 @@ public class ImportDB {
         this.dump = dump;
     }
 
-    public List<User> load() throws IOException {
+    public List<User> load() {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            rd.lines().map(s -> s.split(";")).forEach(s -> users.add(new User(s[0], s[1])));
+            rd.lines().map(s -> s.split(";")).forEach(s -> {
+                if (s.length != 2 || s[0].isBlank() || s[1].isBlank()) {
+                    throw new IllegalArgumentException("Arguments incorrect");
+                }
+                users.add(new User(s[0], s[1]));
+            });
+        } catch (IOException err) {
+            err.printStackTrace();
         }
         return users;
     }
@@ -30,10 +37,10 @@ public class ImportDB {
     private void createTable(Connection cnt) {
         try (PreparedStatement createTable = cnt.prepareStatement(
                 "create table if not exists users("
-                + "id serial primary key,"
-                + "name text,"
-                + "email text"
-                + ");")) {
+                        + "id serial primary key,"
+                        + "name text,"
+                        + "email text"
+                        + ");")) {
             createTable.execute();
         } catch (Exception err) {
             err.printStackTrace();
