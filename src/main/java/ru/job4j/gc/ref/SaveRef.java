@@ -65,6 +65,6 @@ public class SaveRef {
 
     public static void main(String[] args) throws InterruptedException {
         saveSoftReference();
-//        saveWeakReference();
+        saveWeakReference();
     }
 }
