@@ -39,8 +39,10 @@ public class SaveRef {
 
         int countSave = 0;
         for (SoftReference<SaveRef> users : softUsers) {
-            if (users.get() != null) {
+            SaveRef user = users.get();
+            if (user != null) {
                 countSave++;
+                System.out.println("Saved " + user.id);
             }
         }
         System.out.println("Saved " + countSave);
@@ -63,6 +65,6 @@ public class SaveRef {
 
     public static void main(String[] args) throws InterruptedException {
         saveSoftReference();
-        saveWeakReference();
+//        saveWeakReference();
     }
 }
