@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import java.util.Map;
 
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.is;
+
 public class TemplateGeneratorTest {
     @Ignore
     @Test(expected = IllegalArgumentException.class)
@@ -57,5 +60,17 @@ public class TemplateGeneratorTest {
                                 "subject", "you",
                                 "id", "1234"
                         ));
+    }
+
+    @Ignore
+    @Test
+    public void whenTemplateGenerationIsDone() {
+        String expected = new TemplateGenerator()
+                .produce("I am a ${name}, Who are ${subject}?",
+                        Map.of("name", "Petr Arsentev",
+                                "subject", "you"
+                        ));
+        String actual = "I am a Petr Arsentev, Who are you?";
+        assertThat(actual, is(expected));
     }
 }
