@@ -1,10 +1,11 @@
-package ru.job4j.ood.tdd;
+package ru.job4j.ood.tdd.cinema;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
+import ru.job4j.ood.tdd.cinima.*;
 
 import java.util.Arrays;
 import java.util.Calendar;
