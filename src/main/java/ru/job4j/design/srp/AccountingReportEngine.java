@@ -4,11 +4,10 @@ import java.util.function.Predicate;
 
 public class AccountingReportEngine implements Report {
     private Store store;
-    private double rubleCourse;
+    public static final double RUBLE_COURSE = 73;
 
-    public AccountingReportEngine(Store store, double rubleCourse) {
+    public AccountingReportEngine(Store store) {
         this.store = store;
-        this.rubleCourse = rubleCourse;
     }
 
     @Override
@@ -19,7 +18,7 @@ public class AccountingReportEngine implements Report {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary() * rubleCourse).append(" rub").append(";")
+                    .append(employee.getSalary() * RUBLE_COURSE).append(" rub").append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();
