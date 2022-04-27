@@ -1,4 +1,4 @@
-package ru.job4j.design.lsp;
+package ru.job4j.design.lsp.shop;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 public interface Store {
 
-    void add(Food food);
+    boolean add(Food food);
 
     List<Food> findAll();
 

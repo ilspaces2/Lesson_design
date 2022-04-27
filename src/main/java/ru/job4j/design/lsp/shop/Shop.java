@@ -1,4 +1,4 @@
-package ru.job4j.design.lsp;
+package ru.job4j.design.lsp.shop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +8,15 @@ public class Shop implements Store {
     private List<Food> shop = new ArrayList<>();
 
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
+        boolean rzl = false;
         if (checkPercent(food)) {
-            shop.add(food);
+            rzl = shop.add(food);
         } else if (calculateExpiryPercent(food) > 75) {
             food.setPrice(calculateDiscount(food));
-            shop.add(food);
+            rzl = shop.add(food);
         }
+        return rzl;
     }
 
     @Override

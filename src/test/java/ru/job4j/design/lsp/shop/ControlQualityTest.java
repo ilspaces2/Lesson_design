@@ -1,4 +1,4 @@
-package ru.job4j.design.lsp;
+package ru.job4j.design.lsp.shop;
 
 import org.junit.Test;
 
@@ -17,8 +17,8 @@ public class ControlQualityTest {
         Store trash = new Trash();
         List<Store> stores = List.of(shop, warehouse, trash);
         List<Food> foods = List.of(
-                new Milk("Milk 5%", LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2024, 6, 1), 10, 0));
+                new Milk("Milk 5%", LocalDate.now().minusDays(10),
+                        LocalDate.now().plusDays(10), 10, 0));
         new ControlQuality().controlFood(foods, stores);
         assertThat(foods.get(0), is(shop.findByFilter(e -> true).get(0)));
         assertTrue(warehouse.findAll().isEmpty());
@@ -32,8 +32,8 @@ public class ControlQualityTest {
         Store trash = new Trash();
         List<Store> stores = List.of(shop, warehouse, trash);
         List<Food> foods = List.of(
-                new Bread("White", LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2022, 6, 1), 10, 10));
+                new Bread("White", LocalDate.now().minusDays(10),
+                        LocalDate.now().plusDays(1), 10, 10));
         new ControlQuality().controlFood(foods, stores);
         assertThat(foods.get(0), is(shop.findAll().get(0)));
         assertThat(9.0, is(shop.findAll().get(0).getPrice()));
@@ -48,8 +48,8 @@ public class ControlQualityTest {
         Store trash = new Trash();
         List<Store> stores = List.of(shop, warehouse, trash);
         List<Food> foods = List.of(
-                new Milk("Milk 5%", LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2032, 6, 1), 10, 10));
+                new Milk("Milk 5%", LocalDate.now().minusDays(10),
+                        LocalDate.now().plusDays(100), 10, 10));
         new ControlQuality().controlFood(foods, stores);
         assertThat(foods.get(0), is(warehouse.findAll().get(0)));
         assertTrue(shop.findAll().isEmpty());
@@ -63,8 +63,8 @@ public class ControlQualityTest {
         Store trash = new Trash();
         List<Store> stores = List.of(shop, warehouse, trash);
         List<Food> foods = List.of(
-                new Water("BonAqua%", LocalDate.of(2021, 1, 1),
-                        LocalDate.of(2022, 1, 1), 10, 10));
+                new Water("BonAqua%", LocalDate.now().minusDays(10),
+                        LocalDate.now().minusDays(5), 10, 10));
         new ControlQuality().controlFood(foods, stores);
         assertThat(foods.get(0), is(trash.findAll().get(0)));
         assertTrue(shop.findAll().isEmpty());
@@ -78,14 +78,14 @@ public class ControlQualityTest {
         Store trash = new Trash();
         List<Store> stores = List.of(shop, warehouse, trash);
         List<Food> foods = List.of(
-                new Milk("Milk 5%", LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2022, 6, 1), 10, 10),
-                new Bread("White,", LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2030, 1, 1), 12, 0),
-                new Bread("Black,", LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2024, 1, 1), 14, 0),
-                new Water("BonAqua%", LocalDate.of(2021, 1, 1),
-                        LocalDate.of(2022, 1, 1), 10, 10)
+                new Milk("Milk 5%", LocalDate.now().minusDays(10),
+                        LocalDate.now().plusDays(10), 10, 0),
+                new Bread("White", LocalDate.now().minusDays(10),
+                        LocalDate.now().plusDays(100), 10, 10),
+                new Bread("Black,", LocalDate.now().minusDays(10),
+                        LocalDate.now().plusDays(8), 14, 0),
+                new Water("BonAqua%", LocalDate.now().minusDays(10),
+                        LocalDate.now().minusDays(5), 10, 10)
         );
         new ControlQuality().controlFood(foods, stores);
         assertThat(foods.get(0), is(shop.findAll().get(0)));
@@ -99,10 +99,24 @@ public class ControlQualityTest {
         Store shop = new Shop();
         List<Store> stores = List.of(shop);
         new ControlQuality().controlFood(List.of(
-                new Milk("Milk 5%", LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2024, 6, 1), 10, 0)), stores);
+                new Milk("Milk 5%", LocalDate.now().minusDays(10),
+                        LocalDate.now().plusDays(10), 10, 0)), stores);
         shop.deleteAll();
         assertThat(shop.findAll().size(), is(0));
+    }
+
+    @Test
+    public void whenAddToStoreThenTrue() {
+        Store shop = new Shop();
+        assertTrue(shop.add(new Milk("Milk 5%", LocalDate.now().minusDays(10),
+                LocalDate.now().plusDays(10), 10, 0)));
+    }
+
+    @Test
+    public void whenAddToStoreThenFalse() {
+        Store shop = new Shop();
+        assertFalse(shop.add(new Milk("Milk 5%", LocalDate.now().minusDays(10),
+                LocalDate.now().minusDays(5), 10, 0)));
     }
 }
 

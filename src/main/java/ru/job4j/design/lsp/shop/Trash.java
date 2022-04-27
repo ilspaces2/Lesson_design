@@ -1,38 +1,40 @@
-package ru.job4j.design.lsp;
+package ru.job4j.design.lsp.shop;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Warehouse implements Store {
+public class Trash implements Store {
 
-    private List<Food> warehouse = new ArrayList<>();
+    private List<Food> trash = new ArrayList<>();
 
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
+        boolean rez = false;
         if (checkPercent(food)) {
-            warehouse.add(food);
+            rez = trash.add(food);
         }
+        return rez;
     }
 
     @Override
     public List<Food> findAll() {
-        return List.copyOf(warehouse);
+        return List.copyOf(trash);
     }
 
     @Override
     public List<Food> findByFilter(Predicate<Food> filter) {
-        return warehouse.stream().filter(filter).toList();
+        return trash.stream().filter(filter).toList();
     }
 
     @Override
     public void deleteAll() {
-        warehouse.clear();
+        trash.clear();
     }
 
     @Override
     public boolean checkPercent(Food food) {
         int percent = calculateExpiryPercent(food);
-        return percent >= 0 && percent < 25;
+        return percent == -1;
     }
 }
