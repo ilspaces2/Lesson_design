@@ -14,7 +14,7 @@ public class XMLReportEngineTest {
     public void whenJSONGenerates() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSXXX");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         Employee employee1 = new Employee("Boris", now, now, 300);
         Employee employee2 = new Employee("Anna", now, now, 200);
         store.add(employee1);
