@@ -1,6 +1,5 @@
 package ru.job4j.design.lsp.parking;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -8,7 +7,6 @@ import static org.junit.Assert.*;
 
 public class CarTruckParkingTest {
 
-    @Ignore
     @Test
     public void whenNoFreePlacesThanFalse() {
         CarTruckParking parking = new CarTruckParking(0, 1);
@@ -17,7 +15,6 @@ public class CarTruckParkingTest {
         assertFalse(parking.parking(new Truck(2)));
     }
 
-    @Ignore
     @Test
     public void whenCarAndTruckParkingThenTrue() {
         CarTruckParking parking = new CarTruckParking(1, 1);
@@ -25,7 +22,6 @@ public class CarTruckParkingTest {
         assertTrue(parking.parking(new Truck(2)));
     }
 
-    @Ignore
     @Test
     public void whenParkingTwoCarsAndOneTruck() {
         CarTruckParking parking = new CarTruckParking(2, 1);
@@ -36,7 +32,6 @@ public class CarTruckParkingTest {
         assertThat(parking.getTruckPlaces(), is(0));
     }
 
-    @Ignore
     @Test
     public void whenParkingTruckSizeTwoInCarPlacesAndTrackSizeTwoInTruckPlace() {
         CarTruckParking parking = new CarTruckParking(3, 1);
@@ -46,7 +41,6 @@ public class CarTruckParkingTest {
         assertThat(parking.getTruckPlaces(), is(0));
     }
 
-    @Ignore
     @Test
     public void whenParkingTruckSizeTwoAndTruckSizeThreeInCarPlaces() {
         CarTruckParking parking = new CarTruckParking(5, 0);

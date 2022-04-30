@@ -28,6 +28,24 @@ public class CarTruckParking implements Parking {
 
     @Override
     public boolean parking(Vehicle vehicle) {
-        return false;
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle is null");
+        }
+        boolean rzl = false;
+        int vehicleSize = vehicle.getSize();
+        if (vehicleSize == Car.CAR_SIZE && carPlaces > 0) {
+            parkingList.add(vehicle);
+            carPlaces--;
+            rzl = true;
+        } else if (vehicleSize > Car.CAR_SIZE && truckPlaces > 0) {
+            parkingList.add(vehicle);
+            truckPlaces--;
+            rzl = true;
+        } else if (vehicleSize > Car.CAR_SIZE && truckPlaces == 0 && vehicleSize <= carPlaces) {
+            parkingList.add(vehicle);
+            carPlaces -= vehicleSize;
+            rzl = true;
+        }
+        return rzl;
     }
 }
