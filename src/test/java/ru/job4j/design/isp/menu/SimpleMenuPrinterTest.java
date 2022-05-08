@@ -10,7 +10,7 @@ public class SimpleMenuPrinterTest {
 
     @Test
     public void whenPrintMenu() {
-        SimpleMenuPrinter printer = new SimpleMenuPrinter();
+        SimpleMenuPrinterInterceptor printer = new SimpleMenuPrinterInterceptor();
         Menu menu = new SimpleMenu();
         menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
         menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);
@@ -18,11 +18,13 @@ public class SimpleMenuPrinterTest {
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         printer.print(menu);
-        String expected = "1.Сходить в магазин\n"
-                + "---1.1.Купить продукты\n"
-                + "------1.1.1.Купить хлеб\n"
-                + "------1.1.2.Купить молоко\n"
-                + "2.Покормить собаку\n";
-        assertThat(printer.getStrings(), is(expected));
+        String expected = """
+                1.Сходить в магазин
+                ---1.1.Купить продукты
+                ------1.1.1.Купить хлеб
+                ------1.1.2.Купить молоко
+                2.Покормить собаку
+                """;
+        assertThat(printer.getOutput(), is(expected));
     }
 }

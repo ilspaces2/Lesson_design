@@ -4,18 +4,24 @@ import java.util.Scanner;
 
 public class TODOApp {
 
-    private String info = "- Для добавления задачи введите: Добавить.\n"
-            + "(Для новой задачи оставить поле parent пустым)\n"
-            + "(Для создания подзадачи в поле parent ввести имя существующей задачи)\n"
-            + "- Для выхода введите: Выход\n";
+    private static final String EXIT = "Выход";
+
+    private static final String ADD = "Добавить";
+
+    private static final String INFO = """
+            - Для добавления задачи введите: Добавить
+            (Для новой задачи оставить поле parent пустым)
+            (Для создания подзадачи в поле parent ввести имя существующей задачи)
+            - Для выхода введите: Выход
+            """;
 
     public void start(Menu menu, MenuPrinter menuPrinter, ActionDelegate actionDelegate) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(info);
+        System.out.println(INFO);
         menuPrinter.print(menu);
         String input = scanner.nextLine();
-        while (!"Выход".equals(input)) {
-            if ("Добавить".equals(input)) {
+        while (!EXIT.equals(input)) {
+            if (ADD.equals(input)) {
                 System.out.println("Enter parent");
                 String parent = scanner.nextLine();
                 System.out.println("Enter child");

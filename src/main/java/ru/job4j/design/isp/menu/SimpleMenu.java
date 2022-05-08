@@ -9,7 +9,7 @@ public class SimpleMenu implements Menu {
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         boolean rzl = false;
-        if (Objects.equals(parentName, Menu.ROOT)) {
+        if (Objects.equals(parentName, Menu.ROOT) && findItem(childName).isEmpty()) {
             rzl = rootElements.add(new SimpleMenuItem(childName, actionDelegate));
         } else {
             Optional<ItemInfo> itemInfo = findItem(parentName);
