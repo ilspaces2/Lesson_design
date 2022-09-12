@@ -1,11 +1,10 @@
 package ru.job4j.ood.kiss;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MaxMinTest {
     private List<User> list = List.of(
@@ -19,12 +18,12 @@ public class MaxMinTest {
     @Test
     public void whenMaxIs45() {
         int expected = new MaxMin().max(list, User::compareTo).getId();
-        assertThat(45, is(expected));
+        assertEquals(expected, 45);
     }
 
     @Test
     public void whenMinIs0() {
         int expected = new MaxMin().min(list, User::compareTo).getId();
-        assertThat(0, is(expected));
+        assertEquals(expected, 0);
     }
 }

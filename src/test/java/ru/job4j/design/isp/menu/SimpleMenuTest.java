@@ -1,12 +1,11 @@
 package ru.job4j.design.isp.menu;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimpleMenuTest {
 
@@ -39,7 +38,6 @@ public class SimpleMenuTest {
                 menu.select("Покормить собаку").get()
         );
         menu.forEach(i -> System.out.println(i.getNumber() + i.getName()));
-
     }
 
     @Test
@@ -50,7 +48,6 @@ public class SimpleMenuTest {
         menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
-        assertThat(Optional.empty(), is(menu.select("Пойти гулять")));
+        assertEquals(Optional.empty(), menu.select("Пойти гулять"));
     }
-
 }

@@ -1,9 +1,11 @@
 package ru.job4j.io;
 
-import org.junit.Test;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class ConfigTest {
 
@@ -12,8 +14,7 @@ public class ConfigTest {
         String path = "./data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name"),
-                is("User"));
+        assertEquals(config.value("name"), "User");
     }
 
     @Test
@@ -21,10 +22,8 @@ public class ConfigTest {
         String path = "./data/pair_with_comment_and_empty_string.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name"),
-                is("User"));
-        assertThat(config.value("password"),
-                is("12345"));
+        assertEquals(config.value("name"), "User");
+        assertEquals(config.value("password"), "12345");
     }
 
     @Test
@@ -32,8 +31,7 @@ public class ConfigTest {
         String path = "./data/pair_have_several_equals.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("pass"),
-                is("password=1234"));
+        assertEquals(config.value("pass"), "password=1234");
     }
 
     @Test
@@ -41,28 +39,33 @@ public class ConfigTest {
         String path = "./data/pair_double_equals.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("key"),
-                is("=value"));
+        assertEquals(config.value("key"), "=value");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenWithoutEquals() {
-        String path = "./data/pair_without_equals.properties";
-        Config config = new Config(path);
-        config.load();
+        assertThrows(IllegalArgumentException.class, () -> {
+            String path = "./data/pair_without_equals.properties";
+            Config config = new Config(path);
+            config.load();
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenWithoutFirstValue() {
-        String path = "./data/pair_without_first_value.properties";
-        Config config = new Config(path);
-        config.load();
+        assertThrows(IllegalArgumentException.class, () -> {
+            String path = "./data/pair_without_first_value.properties";
+            Config config = new Config(path);
+            config.load();
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenWithoutSecondValue() {
-        String path = "./data/pair_without_second_value.properties";
-        Config config = new Config(path);
-        config.load();
+        assertThrows(IllegalArgumentException.class, () -> {
+            String path = "./data/pair_without_second_value.properties";
+            Config config = new Config(path);
+            config.load();
+        });
     }
 }

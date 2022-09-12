@@ -1,10 +1,9 @@
 package ru.job4j.generics.store;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RoleStoreTest {
     @Test
@@ -12,7 +11,7 @@ public class RoleStoreTest {
         RoleStore store = new RoleStore();
         store.add(new Role("1", "Manager"));
         Role result = store.findById("1");
-        assertThat(result.getRole(), is("Manager"));
+        assertEquals(result.getRole(), "Manager");
     }
 
     @Test
@@ -29,7 +28,7 @@ public class RoleStoreTest {
         store.add(new Role("2", "Manager"));
         store.add(new Role("2", "Director"));
         Role result = store.findById("2");
-        assertThat(result.getRole(), is("Manager"));
+        assertEquals(result.getRole(), "Manager");
     }
 
     @Test
@@ -38,7 +37,8 @@ public class RoleStoreTest {
         store.add(new Role("1", "Manager"));
         store.replace("1", new Role("1", "Director"));
         Role result = store.findById("1");
-        assertThat(result.getRole(), is("Director"));
+        assertEquals(result.getRole(), "Director");
+
     }
 
     @Test
@@ -47,7 +47,7 @@ public class RoleStoreTest {
         store.add(new Role("1", "Manager"));
         store.replace("10", new Role("10", "Director"));
         Role result = store.findById("1");
-        assertThat(result.getRole(), is("Manager"));
+        assertEquals(result.getRole(), "Manager");
     }
 
     @Test
@@ -65,6 +65,6 @@ public class RoleStoreTest {
         store.add(new Role("2", "Director"));
         store.delete("10");
         Role result = store.findById("2");
-        assertThat(result.getRole(), is("Director"));
+        assertEquals(result.getRole(), "Director");
     }
 }

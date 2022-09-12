@@ -1,9 +1,10 @@
 package ru.job4j.design.lsp.parking;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CarTruckParkingTest {
 
@@ -28,8 +29,8 @@ public class CarTruckParkingTest {
         parking.parking(new Car());
         parking.parking(new Car());
         parking.parking(new Truck(2));
-        assertThat(parking.getCarPlaces(), is(0));
-        assertThat(parking.getTruckPlaces(), is(0));
+        assertEquals(parking.getCarPlaces(), 0);
+        assertEquals(parking.getTruckPlaces(), 0);
     }
 
     @Test
@@ -37,8 +38,8 @@ public class CarTruckParkingTest {
         CarTruckParking parking = new CarTruckParking(3, 1);
         parking.parking(new Truck(2));
         parking.parking(new Truck(2));
-        assertThat(parking.getCarPlaces(), is(1));
-        assertThat(parking.getTruckPlaces(), is(0));
+        assertEquals(parking.getCarPlaces(), 1);
+        assertEquals(parking.getTruckPlaces(), 0);
     }
 
     @Test
@@ -46,7 +47,7 @@ public class CarTruckParkingTest {
         CarTruckParking parking = new CarTruckParking(5, 0);
         parking.parking(new Truck(2));
         parking.parking(new Truck(3));
-        assertThat(parking.getCarPlaces(), is(0));
-        assertThat(parking.getTruckPlaces(), is(0));
+        assertEquals(parking.getCarPlaces(), 0);
+        assertEquals(parking.getTruckPlaces(), 0);
     }
 }

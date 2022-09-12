@@ -1,11 +1,10 @@
 package ru.job4j.design.srp;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProgrammerReportEngineTest {
 
@@ -49,6 +48,6 @@ public class ProgrammerReportEngineTest {
                 .append("</p>").append(ln)
                 .append("</body>").append(ln)
                 .append("</html>").append(ln);
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        assertEquals(engine.generate(em -> true), expect.toString());
     }
 }

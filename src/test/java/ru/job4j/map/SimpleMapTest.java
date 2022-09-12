@@ -1,13 +1,15 @@
 package ru.job4j.map;
 
-import org.junit.Test;
-
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class SimpleMapTest {
 
@@ -24,10 +26,10 @@ public class SimpleMapTest {
         map.put("Hello2", "Java2");
         map.put("Hello3", "Java3");
         map.put("Hello4", "Java4");
-        assertThat(map.get("Hello1"), is("Java1"));
-        assertThat(map.get("Hello2"), is("Java2"));
-        assertThat(map.get("Hello3"), is("Java3"));
-        assertThat(map.get("Hello4"), is("Java4"));
+        assertEquals(map.get("Hello1"), "Java1");
+        assertEquals(map.get("Hello2"), "Java2");
+        assertEquals(map.get("Hello3"), "Java3");
+        assertEquals(map.get("Hello4"), "Java4");
     }
 
     @Test
@@ -35,7 +37,7 @@ public class SimpleMapTest {
         SimpleMap<String, String> map = new SimpleMap<>();
         map.put("Hello", "Java");
         assertTrue(map.remove("Hello"));
-        assertThat(map.get("Hello"), is(nullValue()));
+        assertNull(map.get("Hello"));
     }
 
 
@@ -59,15 +61,17 @@ public class SimpleMapTest {
         SimpleMap<String, String> map = new SimpleMap<>();
         map.put("Hello", "1");
         Iterator<String> iterator = map.iterator();
-        assertThat(iterator.next(), is("Hello"));
+        assertEquals(iterator.next(), "Hello");
     }
 
-    @Test(expected = ConcurrentModificationException.class)
+    @Test()
     public void whenIteratorThenModificationMap() {
-        SimpleMap<String, String> map = new SimpleMap<>();
-        map.put("Hello", "1");
-        Iterator<String> iterator = map.iterator();
-        map.put("Hello1", "2");
-        iterator.next();
+        assertThrows(ConcurrentModificationException.class, () -> {
+            SimpleMap<String, String> map = new SimpleMap<>();
+            map.put("Hello", "1");
+            Iterator<String> iterator = map.iterator();
+            map.put("Hello1", "2");
+            iterator.next();
+        });
     }
 }

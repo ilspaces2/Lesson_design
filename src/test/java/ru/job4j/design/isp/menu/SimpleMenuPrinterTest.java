@@ -1,9 +1,8 @@
 package ru.job4j.design.isp.menu;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimpleMenuPrinterTest {
     public static final ActionDelegate STUB_ACTION = System.out::println;
@@ -25,6 +24,6 @@ public class SimpleMenuPrinterTest {
                 ------1.1.2.Купить молоко
                 2.Покормить собаку
                 """;
-        assertThat(printer.getOutput(), is(expected));
+        assertEquals(printer.getOutput(), expected);
     }
 }

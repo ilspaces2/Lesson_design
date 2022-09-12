@@ -1,11 +1,10 @@
 package ru.job4j.design.srp;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AccountingReportEngineTest {
     @Test
@@ -23,6 +22,6 @@ public class AccountingReportEngineTest {
                 .append(worker.getFired()).append(";")
                 .append(worker.getSalary() * AccountingReportEngine.RUBLE_COURSE).append(" rub").append(";")
                 .append(System.lineSeparator());
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        assertEquals(engine.generate(em -> true), expect.toString());
     }
 }

@@ -1,68 +1,65 @@
 package ru.job4j.ood.tdd.template;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TemplateGeneratorTest {
-    @Ignore
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test()
     public void whenTemplateIsNull() {
-        new TemplateGenerator()
+        assertThrows(IllegalArgumentException.class, () -> new TemplateGenerator()
                 .produce(null,
                         Map.of("name", "Petr Arsentev",
-                                "subject", "you"
-                        ));
+                                "subject", "you"))
+        );
     }
 
-    @Ignore
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenMapIsNull() {
-        new TemplateGenerator()
-                .produce("I am a ${name}, Who are ${subject}? ", null);
+        assertThrows(IllegalArgumentException.class, () ->
+                new TemplateGenerator()
+                        .produce("I am a ${name}, Who are ${subject}? ", null)
+        );
     }
 
-    @Ignore
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenTemplateIsEmpty() {
-        new TemplateGenerator()
+        assertThrows(IllegalArgumentException.class, () -> new TemplateGenerator()
                 .produce("",
                         Map.of("name", "Petr Arsentev",
-                                "subject", "you"
-                        ));
+                                "subject", "you"))
+        );
     }
 
-    @Ignore
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenMapIsEmpty() {
-        new TemplateGenerator()
-                .produce("I am a ${name}, Who are ${subject}?", Map.of());
+        assertThrows(IllegalArgumentException.class, () -> new TemplateGenerator()
+                .produce("I am a ${name}, Who are ${subject}?", Map.of())
+        );
     }
 
-    @Ignore
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenMapNotContainsKey() {
-        new TemplateGenerator()
+        assertThrows(IllegalArgumentException.class, () -> new TemplateGenerator()
                 .produce("I am a ${name}, Who are ${subject}?",
-                        Map.of("name", "Petr Arsentev"));
+                        Map.of("name", "Petr Arsentev"))
+        );
     }
 
-    @Ignore
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void whenMapContainsExtraKey() {
-        new TemplateGenerator()
+        assertThrows(IllegalArgumentException.class, () -> new TemplateGenerator()
                 .produce("I am a ${name}, Who are ${subject}?",
                         Map.of("name", "Petr Arsentev",
                                 "subject", "you",
-                                "id", "1234"
-                        ));
+                                "id", "1234"))
+        );
     }
 
-    @Ignore
     @Test
     public void whenTemplateGenerationIsDone() {
         String expected = new TemplateGenerator()
@@ -71,6 +68,6 @@ public class TemplateGeneratorTest {
                                 "subject", "you"
                         ));
         String actual = "I am a Petr Arsentev, Who are you?";
-        assertThat(actual, is(expected));
+        assertEquals(expected, actual);
     }
 }

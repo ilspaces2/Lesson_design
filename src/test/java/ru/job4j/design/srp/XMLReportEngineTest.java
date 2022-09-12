@@ -1,13 +1,12 @@
 package ru.job4j.design.srp;
 
-import org.junit.Test;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class XMLReportEngineTest {
     @Test
@@ -46,6 +45,6 @@ public class XMLReportEngineTest {
                 .append("        </employee>\n")
                 .append("    </employees>\n")
                 .append("</store>\n");
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        assertEquals(engine.generate(em -> true), expect.toString());
     }
 }

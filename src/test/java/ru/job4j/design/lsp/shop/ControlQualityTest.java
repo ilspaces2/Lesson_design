@@ -1,12 +1,13 @@
 package ru.job4j.design.lsp.shop;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ControlQualityTest {
 
@@ -20,7 +21,7 @@ public class ControlQualityTest {
                 new Milk("Milk 5%", LocalDate.now().minusDays(10),
                         LocalDate.now().plusDays(10), 10, 0));
         new ControlQuality().controlFood(foods, stores);
-        assertThat(foods.get(0), is(shop.findByFilter(e -> true).get(0)));
+        assertEquals(foods.get(0), shop.findByFilter(e -> true).get(0));
         assertTrue(warehouse.findAll().isEmpty());
         assertTrue(trash.findAll().isEmpty());
     }
@@ -35,8 +36,8 @@ public class ControlQualityTest {
                 new Bread("White", LocalDate.now().minusDays(10),
                         LocalDate.now().plusDays(1), 10, 10));
         new ControlQuality().controlFood(foods, stores);
-        assertThat(foods.get(0), is(shop.findAll().get(0)));
-        assertThat(9.0, is(shop.findAll().get(0).getPrice()));
+        assertEquals(foods.get(0), shop.findAll().get(0));
+        assertEquals(9.0, shop.findAll().get(0).getPrice());
         assertTrue(warehouse.findAll().isEmpty());
         assertTrue(trash.findAll().isEmpty());
     }
@@ -51,7 +52,7 @@ public class ControlQualityTest {
                 new Milk("Milk 5%", LocalDate.now().minusDays(10),
                         LocalDate.now().plusDays(100), 10, 10));
         new ControlQuality().controlFood(foods, stores);
-        assertThat(foods.get(0), is(warehouse.findAll().get(0)));
+        assertEquals(foods.get(0), warehouse.findAll().get(0));
         assertTrue(shop.findAll().isEmpty());
         assertTrue(trash.findAll().isEmpty());
     }
@@ -66,7 +67,7 @@ public class ControlQualityTest {
                 new Water("BonAqua%", LocalDate.now().minusDays(10),
                         LocalDate.now().minusDays(5), 10, 10));
         new ControlQuality().controlFood(foods, stores);
-        assertThat(foods.get(0), is(trash.findAll().get(0)));
+        assertEquals(foods.get(0), trash.findAll().get(0));
         assertTrue(shop.findAll().isEmpty());
         assertTrue(warehouse.findAll().isEmpty());
     }
@@ -88,10 +89,10 @@ public class ControlQualityTest {
                         LocalDate.now().minusDays(5), 10, 10)
         );
         new ControlQuality().controlFood(foods, stores);
-        assertThat(foods.get(0), is(shop.findAll().get(0)));
-        assertThat(foods.get(1), is(warehouse.findAll().get(0)));
-        assertThat(foods.get(2), is(shop.findAll().get(1)));
-        assertThat(foods.get(3), is(trash.findAll().get(0)));
+        assertEquals(foods.get(0), shop.findAll().get(0));
+        assertEquals(foods.get(1), warehouse.findAll().get(0));
+        assertEquals(foods.get(2), shop.findAll().get(1));
+        assertEquals(foods.get(3), trash.findAll().get(0));
     }
 
     @Test
@@ -102,7 +103,7 @@ public class ControlQualityTest {
                 new Milk("Milk 5%", LocalDate.now().minusDays(10),
                         LocalDate.now().plusDays(10), 10, 0)), stores);
         shop.deleteAll();
-        assertThat(shop.findAll().size(), is(0));
+        assertEquals(shop.findAll().size(), 0);
     }
 
     @Test
@@ -119,5 +120,3 @@ public class ControlQualityTest {
                 LocalDate.now().minusDays(5), 10, 0)));
     }
 }
-
-

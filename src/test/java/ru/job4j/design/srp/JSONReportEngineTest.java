@@ -2,12 +2,11 @@ package ru.job4j.design.srp;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JSONReportEngineTest {
     @Test
@@ -30,6 +29,6 @@ public class JSONReportEngineTest {
                 .append(String.format("\"fired\":%s,", gson.toJson(employee2.getFired())))
                 .append(String.format("\"salary\":%s}]", employee2.getSalary()));
 
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        assertEquals(engine.generate(em -> true), expect.toString());
     }
 }
